@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<title>Termux Python C拡張ランタイム 解説</title>
+<style>
+  body { font-family: sans-serif; max-width: 800px; margin: 2em auto; padding: 0 1em; }
+  pre { background: #f4f4f4; padding: 1em; border-radius: 5px; overflow-x: auto; }
+  h1, h2 { color: #333; }
+  code { font-family: monospace; }
+</style>
+</head>
+<body>
+<h1>Termux Python C拡張ランタイム 解説</h1>
+
+<h2>パッケージインストール</h2>
+<pre><code>pkg update && pkg install clang python make unzip</code></pre>
+
+<h2>ZIP解凍・ディレクトリ移動</h2>
+<pre><code>unzip termux-python-ext-sample.zip
+cd termux-python-ext-sample</code></pre>
+
+<h2>ビルド</h2>
+<pre><code>python setup.py build</code></pre>
+
+<h2>インストール</h2>
+<pre><code>python setup.py install --user</code></pre>
+
+<h2>動作確認</h2>
+<pre><code>python3 -c "import myext; print(myext.hello())"</code></pre>
+
+<h2>ポイント</h2>
+<ul>
+  <li><code>setup.py</code>でC拡張のビルド設定を行う</li>
+  <li><code>myext.c</code>にCの関数が定義されている</li>
+  <li><code>hello()</code>がPythonから呼べる関数</li>
+  <li>インストール先はユーザー環境（--user）</li>
+</ul>
+
+</body>
+</html>
