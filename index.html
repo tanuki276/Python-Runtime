@@ -58,69 +58,28 @@
     .point:hover {
       box-shadow: 0 0 20px #79c0ffdd;
     }
-
-    /* ハンバーガーメニュー */
-    .hamburger {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 32px;
-      height: 24px;
-      cursor: pointer;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .hamburger div {
-      background-color: #58a6ff;
-      height: 4px;
-      border-radius: 2px;
-      box-shadow: 0 0 8px #58a6ffaa;
-      transition: all 0.3s ease;
-    }
-    .hamburger.active div:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .hamburger.active div:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.active div:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    /* メニュー */
-    nav {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 220px;
-      height: 100vh;
+    .links {
+      margin-top: 2em;
+      padding: 16px;
       background-color: #161b22;
-      box-shadow: 4px 0 10px #0008;
-      padding: 40px 20px;
-      transition: left 0.3s ease;
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5em;
-    }
-    nav.active {
-      left: 0;
-    }
-    nav a {
-      color: #79c0ff;
-      font-weight: 600;
-      text-decoration: none;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #79c0ff55;
+      text-align: center;
       font-size: 1.1em;
-      text-shadow: 0 0 6px #79c0ffaa;
-      transition: color 0.2s ease;
     }
-    nav a:hover {
+    .links a {
       color: #58a6ff;
+      font-weight: 700;
+      margin: 0 1em;
+      text-decoration: none;
+      text-shadow: 0 0 6px #58a6ffaa;
+      transition: color 0.3s ease;
+    }
+    .links a:hover {
+      color: #79c0ff;
     }
 
-    /* スワイプで出るテキスト */
+    /* フェードテキスト */
     .fade-text {
       opacity: 0;
       transform: translateY(20px);
@@ -133,20 +92,6 @@
   </style>
 </head>
 <body>
-  <!-- ハンバーガーメニュー -->
-  <div class="hamburger" id="hamburger" aria-label="メニュー開閉" role="button" tabindex="0">
-    <div></div><div></div><div></div>
-  </div>
-
-  <nav id="navMenu" aria-label="ページ内リンクメニュー">
-    <a href="#install-modules">必要なモジュールのインストール</a>
-    <a href="#repo-clone">リポジトリクローン</a>
-    <a href="#unzip">ZIP解凍・ディレクトリ移動</a>
-    <a href="#build">ビルド</a>
-    <a href="#install">インストール</a>
-    <a href="#check">動作確認</a>
-    <a href="#point">ポイント</a>
-  </nav>
 
   <h1>Python C拡張ランタイム 手順まとめ</h1>
 
@@ -185,22 +130,12 @@ cd termux-python-ext-sample
     </ul>
   </div>
 
-  <script>
-    // ハンバーガーメニュー開閉処理
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navMenu.classList.toggle('active');
-    });
-    // キーボード操作対応（Enterキーで開閉）
-    hamburger.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        hamburger.click();
-      }
-    });
+  <div class="links fade-text">
+    <a href="https://github.com/tanuki276/Python-Runtime" target="_blank" rel="noopener">ソースコード</a>
+    <a href="https://discord.gg/vq6pqgXj" target="_blank" rel="noopener">サーバー</a>
+  </div>
 
+  <script>
     // スクロール時に見出しとpreタグのフェードイン演出
     const fadeTargets = document.querySelectorAll('.fade-text');
     function checkFade() {
@@ -214,26 +149,7 @@ cd termux-python-ext-sample
     }
     window.addEventListener('scroll', checkFade);
     window.addEventListener('load', checkFade);
-
-    // スワイプ検知（スマホ向け） - 左右で開閉
-    let touchStartX = null;
-    document.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-    document.addEventListener('touchend', e => {
-      if (touchStartX === null) return;
-      const touchEndX = e.changedTouches[0].screenX;
-      const diffX = touchEndX - touchStartX;
-      // スワイプ距離が30px以上
-      if (diffX > 30) { // 右スワイプでメニューを開く
-        hamburger.classList.add('active');
-        navMenu.classList.add('active');
-      } else if (diffX < -30) { // 左スワイプでメニューを閉じる
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-      }
-      touchStartX = null;
-    });
   </script>
+
 </body>
 </html>
