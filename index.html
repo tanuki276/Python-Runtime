@@ -1,42 +1,85 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8" />
-<title>Python C拡張ランタイム</title>
-<style>
-  body { font-family: sans-serif; max-width: 800px; margin: 2em auto; padding: 0 1em; }
-  pre { background: #f4f4f4; padding: 1em; border-radius: 5px; overflow-x: auto; }
-  h1, h2 { color: #333; }
-  code { font-family: monospace; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Python C拡張ランタイム 手順まとめ</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #eee;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      text-align: center;
+      color: #ff5555;
+      margin-bottom: 1em;
+    }
+    h2 {
+      color: #ff8844;
+      border-bottom: 2px solid #ff8844;
+      padding-bottom: 0.3em;
+      margin-top: 2em;
+    }
+    pre {
+      background-color: #222;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 1em;
+    }
+    ul {
+      margin-left: 1.2em;
+    }
+    .point {
+      background-color: #333;
+      border-left: 6px solid #ff8844;
+      padding: 12px;
+      margin-top: 1.5em;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
-<h1>Python C拡張ランタイム</h1>
+  <h1>Python C拡張ランタイム 手順まとめ</h1>
 
-<h2>パッケージインストール</h2>
-<pre><code>pkg update && pkg install clang python make unzip</code></pre>
+  <h2>必要なモジュールのインストール</h2>
+  <pre>pkg update && pkg install clang python make unzip git</pre>
 
-<h2>ZIP解凍・ディレクトリ移動</h2>
-<pre><code>unzip termux-python-ext-sample.zip
-cd termux-python-ext-sample</code></pre>
+  <h2>リポジトリクローン</h2>
+  <pre>
+git clone https://github.com/tanuki276/Python-Runtime.git
+cd Python-Runtime/termux-python-ext-sample
+  </pre>
 
-<h2>ビルド</h2>
-<pre><code>python setup.py build</code></pre>
+  <h2>（ZIP利用時のみ）ZIP解凍・ディレクトリ移動</h2>
+  <pre>
+unzip termux-python-ext-sample.zip
+cd termux-python-ext-sample
+  </pre>
 
-<h2>インストール</h2>
-<pre><code>python setup.py install --user</code></pre>
+  <h2>ビルド</h2>
+  <pre>python setup.py build</pre>
 
-<h2>動作確認</h2>
-<pre><code>python3 -c "import myext; print(myext.hello())"</code></pre>
+  <h2>インストール</h2>
+  <pre>python setup.py install --user</pre>
 
-<h2>ポイント</h2>
-<ul>
-  <li><code>setup.py</code>でC拡張のビルド設定を行う</li>
-  <li><code>myext.c</code>にCの関数が定義されている</li>
-  <li><code>hello()</code>がPythonから呼べる関数</li>
-  <li>インストール先はユーザー環境（--user）</li>
-  <li><strong>Hello from C Extension! と表示されたら成功</strong></li>
-</ul>
+  <h2>動作確認</h2>
+  <pre>python3 -c "import myext; print(myext.hello())"</pre>
 
+  <div class="point">
+    <h2>ポイント</h2>
+    <ul>
+      <li>setup.pyでC拡張のビルド設定を行う</li>
+      <li>myext.cにCの関数が定義されている</li>
+      <li>hello()がPythonから呼べる関数</li>
+      <li>インストール先はユーザー環境（--user）</li>
+      <li><code>Hello from C Extension!</code> と表示されたら成功</li>
+    </ul>
+  </div>
 </body>
 </html>
