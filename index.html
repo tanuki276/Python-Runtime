@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
-<title>Termux Python C拡張ランタイム 解説</title>
+<title>Python C拡張ランタイム</title>
 <style>
   body { font-family: sans-serif; max-width: 800px; margin: 2em auto; padding: 0 1em; }
   pre { background: #f4f4f4; padding: 1em; border-radius: 5px; overflow-x: auto; }
@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-<h1>Termux Python C拡張ランタイム 解説</h1>
+<h1>Python C拡張ランタイム</h1>
 
 <h2>パッケージインストール</h2>
 <pre><code>pkg update && pkg install clang python make unzip</code></pre>
@@ -35,6 +35,7 @@ cd termux-python-ext-sample</code></pre>
   <li><code>myext.c</code>にCの関数が定義されている</li>
   <li><code>hello()</code>がPythonから呼べる関数</li>
   <li>インストール先はユーザー環境（--user）</li>
+  <li><strong>Hello from C Extension! と表示されたら成功</strong></li>
 </ul>
 
 </body>
